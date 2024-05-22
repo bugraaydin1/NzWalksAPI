@@ -22,12 +22,11 @@ namespace NZWalksAPI.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAll(
-                [FromQuery] string? filterOn,
-                [FromQuery] string? filter,
-                [FromQuery] string? sortBy,
-                [FromQuery] bool? isAscending)
+                [FromQuery] string? filterOn, [FromQuery] string? filter,
+                [FromQuery] string? sortBy, [FromQuery] bool? isAscending,
+                [FromQuery] int page = 1, [FromQuery] int pageSize = 50)
         {
-            var regionsModel = await _regionRepository.GetAllAsync(filterOn, filter, sortBy, isAscending ?? true);
+            var regionsModel = await _regionRepository.GetAllAsync(filterOn, filter, sortBy, isAscending ?? true, page, pageSize);
             var regionsDto = mapper.Map<List<RegionDto>>(regionsModel);
 
             return Ok(regionsDto);

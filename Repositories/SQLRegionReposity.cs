@@ -32,10 +32,9 @@ namespace NZWalksAPI.Repositories
         }
 
         public async Task<List<Region>> GetAllAsync(
-            string? filterOn,
-            string? filter,
-            string? sortBy,
-            bool isAscending = true)
+            string? filterOn, string? filter,
+            string? sortBy, bool isAscending = true,
+            int page = 1, int pageSize = 50)
         {
             var regions = _dbContext.Regions.AsQueryable();
 
@@ -69,7 +68,7 @@ namespace NZWalksAPI.Repositories
                 }
             }
 
-            return await regions.ToListAsync();
+            return await regions.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
         }
 
         public async Task<Region?> GetByIdAsync(Guid id)

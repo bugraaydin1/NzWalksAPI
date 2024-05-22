@@ -19,9 +19,12 @@ namespace NZWalksAPI.Controllers
         private readonly IMapper mapper = mapper;
 
         [HttpGet()]
-        public async Task<IActionResult> GetAll([FromQuery] string? filterOn, [FromQuery] string? filter, [FromQuery] string? sortBy, [FromQuery] bool? isAscending)
+        public async Task<IActionResult> GetAll(
+            [FromQuery] string? filterOn, [FromQuery] string? filter,
+            [FromQuery] string? sortBy, [FromQuery] bool? isAscending,
+            [FromQuery] int page = 1, [FromQuery] int pageSize = 50)
         {
-            var walkModel = await walkRepository.GetAllAsync(filterOn, filter, sortBy, isAscending ?? true);
+            var walkModel = await walkRepository.GetAllAsync(filterOn, filter, sortBy, isAscending ?? true, page, pageSize);
 
             return Ok(mapper.Map<List<WalkDto>>(walkModel));
         }
