@@ -3,7 +3,7 @@ using NZWalksAPI.Models.Domain;
 
 namespace NZWalksAPI.Data
 {
-    public class NZWalksDbContext(DbContextOptions dbContextOptions) : DbContext(dbContextOptions)
+    public class NZWalksDbContext(DbContextOptions<NZWalksDbContext> dbContextOptions) : DbContext(dbContextOptions)
     {
         // explicit construtor (primary used instead):
         // public NZWalksDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
