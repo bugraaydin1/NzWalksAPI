@@ -31,7 +31,11 @@ namespace NZWalksAPI.Repositories
             return existingRegion;
         }
 
-        public async Task<List<Region>> GetAllAsync(string? filterOn, string? filter)
+        public async Task<List<Region>> GetAllAsync(
+            string? filterOn,
+            string? filter,
+            string? sortBy,
+            bool isAscending = true)
         {
             var regions = _dbContext.Regions.AsQueryable();
 
@@ -44,6 +48,21 @@ namespace NZWalksAPI.Repositories
                         break;
                     case "code":
                         regions = regions.Where(r => r.Code.Contains(filter));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                switch (sortBy.ToLower())
+                {
+                    case "name":
+                        regions = isAscending ? regions.OrderBy(r => r.Name) : regions.OrderByDescending(r => r.Name);
+                        break;
+                    case "code":
+                        regions = isAscending ? regions.OrderBy(r => r.Code) : regions.OrderByDescending(r => r.Code);
                         break;
                     default:
                         break;

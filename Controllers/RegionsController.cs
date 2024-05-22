@@ -21,9 +21,13 @@ namespace NZWalksAPI.Controllers
         private readonly IMapper mapper = mapper;
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string? filterOn, [FromQuery] string? filter)
+        public async Task<IActionResult> GetAll(
+                [FromQuery] string? filterOn,
+                [FromQuery] string? filter,
+                [FromQuery] string? sortBy,
+                [FromQuery] bool? isAscending)
         {
-            var regionsModel = await _regionRepository.GetAllAsync(filterOn, filter);
+            var regionsModel = await _regionRepository.GetAllAsync(filterOn, filter, sortBy, isAscending ?? true);
             var regionsDto = mapper.Map<List<RegionDto>>(regionsModel);
 
             return Ok(regionsDto);
