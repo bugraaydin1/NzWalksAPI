@@ -18,10 +18,10 @@ namespace NZWalksAPI.Controllers
         private readonly IWalkRepository walkRepository = walkRepository;
         private readonly IMapper mapper = mapper;
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet()]
+        public async Task<IActionResult> GetAll([FromQuery] string? filterOn, [FromQuery] string? filter)
         {
-            var walkModel = await walkRepository.GetAllAsync();
+            var walkModel = await walkRepository.GetAllAsync(filterOn, filter);
 
             return Ok(mapper.Map<List<WalkDto>>(walkModel));
         }

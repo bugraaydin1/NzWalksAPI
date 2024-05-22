@@ -31,9 +31,26 @@ namespace NZWalksAPI.Repositories
             return existingRegion;
         }
 
-        public async Task<List<Region>> GetAllAsync()
+        public async Task<List<Region>> GetAllAsync(string? filterOn, string? filter)
         {
-            return await _dbContext.Regions.ToListAsync();
+            var regions = _dbContext.Regions.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filterOn) && !string.IsNullOrWhiteSpace(filter))
+            {
+                switch (filterOn.ToLower())
+                {
+                    case "name":
+                        regions = regions.Where(r => r.Name.Contains(filter));
+                        break;
+                    case "code":
+                        regions = regions.Where(r => r.Code.Contains(filter));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return await regions.ToListAsync();
         }
 
         public async Task<Region?> GetByIdAsync(Guid id)
