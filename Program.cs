@@ -2,8 +2,10 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NzWalksAPI.Repositories;
 using NZWalksAPI.Data;
 using NZWalksAPI.Mappings;
 using NZWalksAPI.Repositories;
@@ -41,6 +43,8 @@ builder.Services.AddSwaggerGen(o =>
     });
 });
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<NZWalksDbContext>(o =>
@@ -55,6 +59,7 @@ builder.Services.AddDbContext<NZWalksAuthDbContext>(o =>
 builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
 builder.Services.AddScoped<IWalkRepository, SQLWalkRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
@@ -100,6 +105,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication(); //login
 app.UseAuthorization(); //role
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+    RequestPath = "/Images"
+});
 
 app.MapControllers();
 app.UseHttpsRedirection();

@@ -11,6 +11,6 @@ namespace NZWalksAPI.Models.Domain
         public required long Size { get; set; }
         public required string Extension { get; set; }
         public string? Description { get; set; }
-        public required string Path { get; set; }
+        public string Path { get; set; }
     }
 }
