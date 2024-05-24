@@ -5,12 +5,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NzWalksAPI.Middlewares;
 using NzWalksAPI.Repositories;
 using NZWalksAPI.Data;
 using NZWalksAPI.Mappings;
 using NZWalksAPI.Repositories;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/NZWalks_log.txt", rollingInterval: RollingInterval.Day)
+    .MinimumLevel.Information()
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -103,6 +114,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseMiddleware<ExceptionHandlerMiddleware>();
+
 app.UseAuthentication(); //login
 app.UseAuthorization(); //role
 
@@ -112,8 +125,8 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/Images"
 });
 
-app.MapControllers();
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.Run();
 

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,11 +17,13 @@ namespace NZWalksAPI.Controllers
     public class RegionsController
     (
         IRegionRepository regionRepository,
-        IMapper mapper
+        IMapper mapper,
+        ILogger<RegionsController> logger
     ) : ControllerBase
     {
         private readonly IRegionRepository _regionRepository = regionRepository;
         private readonly IMapper mapper = mapper;
+        private readonly ILogger<RegionsController> logger = logger;
 
         [HttpGet]
         [Authorize(Roles = "Reader")]
@@ -29,8 +32,12 @@ namespace NZWalksAPI.Controllers
                 [FromQuery] string? sortBy, [FromQuery] bool? isAscending,
                 [FromQuery] int page = 1, [FromQuery] int pageSize = 50)
         {
+            logger.LogInformation("Request start. GetAll Regions");
+
             var regionsModel = await _regionRepository.GetAllAsync(filterOn, filter, sortBy, isAscending ?? true, page, pageSize);
             var regionsDto = mapper.Map<List<RegionDto>>(regionsModel);
+
+            logger.LogInformation($"Request finished. GetAll Regions with data: {JsonSerializer.Serialize(regionsModel)}");
 
             return Ok(regionsDto);
         }
@@ -39,12 +46,15 @@ namespace NZWalksAPI.Controllers
         [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetById(Guid id)
         {
+            logger.LogInformation("Request start. Get Region with id:{id}", id);
             var regionModel = await _regionRepository.GetByIdAsync(id);
 
             if (regionModel == null)
             {
                 return NotFound();
             }
+
+            logger.LogInformation($"Request finished. Get Region: {JsonSerializer.Serialize(regionModel)}");
 
             return Ok(mapper.Map<RegionDto>(regionModel));
         }
