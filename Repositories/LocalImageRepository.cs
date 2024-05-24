@@ -10,6 +10,11 @@ namespace NzWalksAPI.Repositories
         private readonly IHttpContextAccessor httpContextAccessor = httpContextAccessor;
         private readonly NZWalksDbContext dbContext = dbContext;
 
+        public async Task<List<Image>> GetAllAsync()
+        {
+            return await dbContext.Images.ToListAsync();
+        }
+
         public async Task<Image> Upload(Image image)
         {
             var localFilePath = Path.Combine(webHostEnvironment.ContentRootPath, "Images", $"{image.Name}{image.Extension}");

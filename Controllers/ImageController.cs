@@ -1,4 +1,7 @@
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NzWalksAPI.Models.DTO;
 using NzWalksAPI.Repositories;
 using NZWalksAPI.Models.Domain;
 using NZWalksAPI.Models.DTO;
@@ -7,11 +10,25 @@ namespace NZWalksAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ImagesController(IImageRepository imageRepository) : ControllerBase
+    public class ImagesController
+    (
+        IImageRepository imageRepository,
+        IMapper mapper
+    ) : ControllerBase
     {
         private readonly IImageRepository imageRepository = imageRepository;
+        private readonly IMapper mapper = mapper;
+
+        [HttpGet]
+        [Authorize(Roles = "Read")]
+        public async Task<ActionResult<string>> GetAll()
+        {
+            var imagesModel = await imageRepository.GetAllAsync();
+            return Ok(mapper.Map<List<ImageDto>>(imagesModel));
+        }
 
         [HttpPost("upload")]
+        [Authorize(Roles = "Write")]
         public async Task<IActionResult> UploadImage([FromForm] ImageUploadRequstDto request)
         {
             ValidateFileUpload(request);
