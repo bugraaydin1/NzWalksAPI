@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NzWalksAPI.Controllers.Base;
 using NZWalksAPI.CustomActionFilters;
 using NZWalksAPI.Models.Domain;
 using NZWalksAPI.Models.DTO;
@@ -8,18 +9,19 @@ using NZWalksAPI.Repositories;
 
 namespace NZWalksAPI.Controllers
 {
-    [ApiController]
-    [Route("/api/[controller]")]
+    [ApiVersion("1")]
+    [ApiVersion("2")]
     public class WalksController
     (
       IWalkRepository walkRepository,
       IMapper mapper
-    ) : ControllerBase
+    ) : BaseController
     {
         private readonly IWalkRepository walkRepository = walkRepository;
         private readonly IMapper mapper = mapper;
 
         [HttpGet]
+        [MapToApiVersion("1")]
         [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetAll(
             [FromQuery] string? filterOn, [FromQuery] string? filter,
@@ -30,8 +32,21 @@ namespace NZWalksAPI.Controllers
 
             return Ok(mapper.Map<List<WalkDto>>(walkModel));
         }
+        [HttpGet]
+        [MapToApiVersion("2")]
+        [Authorize(Roles = "Reader")]
+        public async Task<IActionResult> GetAllV2(
+            [FromQuery] string? filterOn, [FromQuery] string? filter,
+            [FromQuery] string? sortBy, [FromQuery] bool? isAscending,
+            [FromQuery] int page = 1, [FromQuery] int pageSize = 50)
+        {
+            var walkModel = await walkRepository.GetAllAsync(filterOn, filter, sortBy, isAscending ?? true, page, pageSize);
+
+            return Ok(mapper.Map<List<WalkDtoV2>>(walkModel));
+        }
 
         [HttpGet("{id}")]
+        [MapToApiVersion("1")]
         [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -43,6 +58,20 @@ namespace NZWalksAPI.Controllers
             }
 
             return Ok(mapper.Map<WalkDto>(walkModel));
+        }
+        [HttpGet("{id}")]
+        [MapToApiVersion("2")]
+        [Authorize(Roles = "Reader")]
+        public async Task<IActionResult> GetByIdV2(Guid id)
+        {
+            var walkModel = await walkRepository.GetByIdAsync(id);
+
+            if (walkModel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<WalkDtoV2>(walkModel));
         }
 
         [HttpPost]

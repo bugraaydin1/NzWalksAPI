@@ -13,4 +13,12 @@ namespace NZWalksAPI.Models.DTO
         public RegionDto Region { get; set; }
         public DifficultyDto Difficulty { get; set; }
     }
+
+    public class WalkDtoV2
+    {
+        public Guid Id { get; set; }
+        public required string Name { get; set; }
+        public required double Length { get; set; }
+        public string? ImageUrl { get; set; }
+    }
 }

@@ -7,4 +7,11 @@ namespace NZWalksAPI.Models.DTO
         public required string Name { get; set; }
         public string? ImageUrl { get; set; }
     }
+
+    public class RegionDtoV2
+    {
+        public Guid Id { get; set; }
+        public required string Name { get; set; }
+        public string? ImageUrl { get; set; }
+    }
 }

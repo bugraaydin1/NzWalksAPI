@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NzWalksAPI.Controllers.Base;
 using NZWalksAPI.CustomActionFilters;
 using NZWalksAPI.Data;
 using NZWalksAPI.Models.Domain;
@@ -12,20 +13,21 @@ using NZWalksAPI.Repositories;
 
 namespace NZWalksAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [ApiVersion("2")]
     public class RegionsController
-    (
-        IRegionRepository regionRepository,
-        IMapper mapper,
-        ILogger<RegionsController> logger
-    ) : ControllerBase
+   (
+       IRegionRepository regionRepository,
+       IMapper mapper,
+       ILogger<RegionsController> logger
+   ) : BaseController
     {
         private readonly IRegionRepository _regionRepository = regionRepository;
         private readonly IMapper mapper = mapper;
         private readonly ILogger<RegionsController> logger = logger;
 
         [HttpGet]
+        [MapToApiVersion("1")]
         [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetAll(
                 [FromQuery] string? filterOn, [FromQuery] string? filter,
@@ -41,8 +43,26 @@ namespace NZWalksAPI.Controllers
 
             return Ok(regionsDto);
         }
+        [HttpGet]
+        [MapToApiVersion("2")]
+        [Authorize(Roles = "Reader")]
+        public async Task<IActionResult> GetAllV2(
+                [FromQuery] string? filterOn, [FromQuery] string? filter,
+                [FromQuery] string? sortBy, [FromQuery] bool? isAscending,
+                [FromQuery] int page = 1, [FromQuery] int pageSize = 50)
+        {
+            logger.LogInformation("Request start. GetAll Regions");
+
+            var regionsModel = await _regionRepository.GetAllAsync(filterOn, filter, sortBy, isAscending ?? true, page, pageSize);
+            var regionsDto = mapper.Map<List<RegionDtoV2>>(regionsModel);
+
+            logger.LogInformation($"Request finished. GetAll Regions with data: {JsonSerializer.Serialize(regionsModel)}");
+
+            return Ok(regionsDto);
+        }
 
         [HttpGet("{id}")]
+        [MapToApiVersion("1")]
         [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -57,6 +77,23 @@ namespace NZWalksAPI.Controllers
             logger.LogInformation($"Request finished. Get Region: {JsonSerializer.Serialize(regionModel)}");
 
             return Ok(mapper.Map<RegionDto>(regionModel));
+        }
+        [HttpGet("{id}")]
+        [MapToApiVersion("2")]
+        [Authorize(Roles = "Reader")]
+        public async Task<IActionResult> GetByIdV2(Guid id)
+        {
+            logger.LogInformation("Request start. Get Region with id:{id}", id);
+            var regionModel = await _regionRepository.GetByIdAsync(id);
+
+            if (regionModel == null)
+            {
+                return NotFound();
+            }
+
+            logger.LogInformation($"Request finished. Get Region: {JsonSerializer.Serialize(regionModel)}");
+
+            return Ok(mapper.Map<RegionDtoV2>(regionModel));
         }
 
         [HttpPost]

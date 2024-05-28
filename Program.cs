@@ -1,6 +1,9 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
@@ -29,6 +32,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o =>
 {
     o.SwaggerDoc("v1", new OpenApiInfo { Version = "v1", Title = "NZ Walks API", });
+    o.SwaggerDoc("v2", new OpenApiInfo { Version = "v2", Title = "NZ Walks API v2", });
     o.AddSecurityDefinition(
        JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
        {
@@ -57,6 +61,19 @@ builder.Services.AddSwaggerGen(o =>
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
+
+builder.Services.AddApiVersioning(c =>
+{
+    c.DefaultApiVersion = new ApiVersion(1, 0);
+    c.ReportApiVersions = true;
+    c.AssumeDefaultVersionWhenUnspecified = true;
+    c.ApiVersionReader = ApiVersionReader.Combine(new UrlSegmentApiVersionReader(), new HeaderApiVersionReader("x-api-version"), new MediaTypeApiVersionReader("x-api-version"));
+});
+builder.Services.AddVersionedApiExplorer(setup =>
+{
+    setup.GroupNameFormat = "'v'VVV";
+    setup.SubstituteApiVersionInUrl = true;
+});
 
 builder.Services.AddDbContext<NZWalksDbContext>(o =>
 {
@@ -110,6 +127,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "NZ Walks API v1");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "NZ Walks API v2");
         c.EnableTryItOutByDefault();
     });
 }
