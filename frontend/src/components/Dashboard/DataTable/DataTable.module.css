@@ -1,0 +1,51 @@
+.container {
+	width: 80%;
+	height: 80%;
+	margin: 30px auto;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+	display: flex;
+	gap: 20px;
+	margin-bottom: 20px;
+}
+
+.data-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+.data-table th,
+.data-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+.data-table th {
+	background-color: #f2f2f2;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.pagination button {
+	max-width: auto;
+	width: 40px;
+	height: 30px;
+	margin-right: 5px;
+	padding: 5px 10px;
+
+	background-color: slategray;
+
+	&.disabled {
+		cursor: initial;
+		background-color: #007bff;
+	}
+}
