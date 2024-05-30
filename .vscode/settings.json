@@ -1,0 +1,4 @@
+{
+	"appService.defaultWebAppToDeploy": "/subscriptions/245cbaf3-e068-48be-a464-f40c2305b2c9/resourceGroups/rg-nzwalks-eastus-dev-001/providers/Microsoft.Web/sites/app-nzwalks-eastus-dev-002",
+	"appService.deploySubpath": "bin/Publish"
+}
