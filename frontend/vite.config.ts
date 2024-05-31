@@ -3,12 +3,15 @@ import react from "@vitejs/plugin-react";
 import mkcert from "vite-plugin-mkcert";
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
 	base: "/app",
 	server: {
 		proxy: {
 			"/api": {
-				target: "https://localhost:7148",
+				target:
+					mode === "development"
+						? "https://localhost:7148"
+						: "https://app-nzwalks-eastus-dev-002.azurewebsites.net/",
 				changeOrigin: true,
 			},
 		},
@@ -16,4 +19,4 @@ export default defineConfig({
 		port: 3001,
 	},
 	plugins: [react(), mkcert()],
-});
+}));

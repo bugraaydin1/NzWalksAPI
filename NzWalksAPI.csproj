@@ -48,4 +48,9 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Images\*">
+      <CopyToPublishDirectory>always</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
