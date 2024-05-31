@@ -20,9 +20,6 @@ export default function Login() {
 				username: email,
 				password,
 			});
-
-			console.log({ response });
-
 			const { jwtToken } = response.data;
 
 			if (response.status === 200 && jwtToken) {

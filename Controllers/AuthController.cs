@@ -26,15 +26,15 @@ namespace NZWalksAPI.Controllers
 
             var identityResult = await userManager.CreateAsync(identityUser, registerRequestDto.Password);
 
-
             if (identityResult.Succeeded)
+
             {
                 if (registerRequestDto.Roles != null && registerRequestDto.Roles.Any())
                 {
                     identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestDto.Roles);
 
                     if (identityResult.Succeeded)
-                        return Created();
+                        return Created("user", registerRequestDto.Username);
                 }
             };
 

@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from "react";
+import { useState, FormEventHandler } from "react";
 import { registerAPI } from "../../api/endpoints";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,6 +8,7 @@ import classes from "./Signup.module.css";
 export default function Signup() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [roles, setRoles] = useState<string[]>([]);
 	const [error, setError] = useState("");
 
 	const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function Signup() {
 			const response = await api.post(registerAPI(), {
 				username: email,
 				password,
+				roles,
 			});
 
 			if (response.status === 201) {
@@ -30,6 +32,19 @@ export default function Signup() {
 				setError(error.response.data);
 			}
 		}
+	};
+
+	const handleRole = (role: string) => {
+		const newRoles = [...roles];
+		const idx = newRoles.findIndex((r) => r === role);
+
+		if (idx > -1) {
+			newRoles.splice(idx, 1);
+		} else {
+			newRoles.push(role);
+		}
+
+		setRoles(newRoles);
 	};
 
 	return (
@@ -54,6 +69,25 @@ export default function Signup() {
 						required
 					/>
 				</div>
+				<div className={classes["form-group"]}>
+					<div className={classes["checkbox-group"]}>
+						<label htmlFor="read-role">Read</label>
+						<input
+							id="read-role"
+							type="checkbox"
+							onChange={() => handleRole("Reader")}
+						/>
+					</div>
+					<div className={classes["checkbox-group"]}>
+						<label htmlFor="write-role">Write</label>
+						<input
+							id="write-role"
+							type="checkbox"
+							onChange={() => handleRole("Writer")}
+						/>
+					</div>
+				</div>
+
 				<button type="submit">Signup</button>
 				{error && <div className={classes["error-message"]}> {error} </div>}
 				<Link to="/app/login"> Already have account?</Link>

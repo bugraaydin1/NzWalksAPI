@@ -102,9 +102,6 @@ const DataTable = ({
 						<tr key={item.id}>
 							{Object.entries(item).map(([key, val]) => {
 								const isImage = key === "imageUrl";
-
-								console.log({ isImage, key });
-
 								return (
 									<td key={val}>
 										{isImage ? <img height={60} src={val} alt={val} /> : val}
