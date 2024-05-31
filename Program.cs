@@ -14,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using NzWalksAPI.Middlewares;
 using NzWalksAPI.Repositories;
 using NZWalksAPI.Data;
+using NZWalksAPI.Extensions;
 using NZWalksAPI.Mappings;
 using NZWalksAPI.Repositories;
 using Serilog;
@@ -193,6 +194,6 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseHttpsRedirection();
 app.MapControllers();
 
-app.Run();
+await app.RunWithMigrationsAsync("ENABLE_MIGRATIONS");
 
 
