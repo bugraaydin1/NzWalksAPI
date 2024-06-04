@@ -1,6 +1,6 @@
-using NZWalksAPI.Models.Domain;
+using NzWalksAPI.Domain.Domain;
 
-namespace NZWalksAPI.Models.DTO
+namespace NzWalksAPI.Domain.DTO
 {
     public class DifficultyDto
     {

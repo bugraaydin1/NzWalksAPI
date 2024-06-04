@@ -1,4 +1,4 @@
-namespace NZWalksAPI.Models.DTO
+namespace NzWalksAPI.Domain.DTO
 {
     public class RegionDto
     {

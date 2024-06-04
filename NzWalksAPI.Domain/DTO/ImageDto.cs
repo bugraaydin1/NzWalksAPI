@@ -1,4 +1,4 @@
-namespace NzWalksAPI.Models.DTO
+namespace NzWalksAPI.Domain.DTO
 {
     public class ImageDto
     {

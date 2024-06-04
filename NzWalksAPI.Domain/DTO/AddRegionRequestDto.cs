@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace NZWalksAPI.Models.DTO
+namespace NzWalksAPI.Domain.DTO
 {
     public class AddRegionRequestDto
     {

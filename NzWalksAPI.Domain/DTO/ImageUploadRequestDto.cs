@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
-namespace NZWalksAPI.Models.DTO
+namespace NzWalksAPI.Domain.DTO
 {
     public class ImageUploadRequstDto
     {
