@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using NZWalksAPI.Models.Domain;
+using NzWalksAPI.Domain.Domain;
 
-namespace NZWalksAPI.Data
+namespace NzWalksAPI.Data
 {
     public class NZWalksAuthDbContext : IdentityDbContext
     {

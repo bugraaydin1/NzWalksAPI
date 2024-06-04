@@ -2,9 +2,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace NZWalksAPI.Repositories
+namespace NzWalksAPI.Data.Repositories
 {
     public class TokenRepository(IConfiguration configuration) : ITokenRepository
     {

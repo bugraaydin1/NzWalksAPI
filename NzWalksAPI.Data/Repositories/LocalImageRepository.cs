@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using NZWalksAPI.Data;
-using NZWalksAPI.Models.Domain;
+using NzWalksAPI.Domain.Domain;
+using NzWalksAPI.Data;
 
-namespace NzWalksAPI.Repositories
+namespace NzWalksAPI.Data.Repositories
 {
     public class LocalImageRepository(IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor, NZWalksDbContext dbContext) : IImageRepository
     {

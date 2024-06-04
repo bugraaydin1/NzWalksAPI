@@ -1,6 +1,6 @@
-using NZWalksAPI.Models.Domain;
+using NzWalksAPI.Domain.Domain;
 
-namespace NzWalksAPI.Repositories
+namespace NzWalksAPI.Data.Repositories
 {
     public interface IImageRepository
     {
