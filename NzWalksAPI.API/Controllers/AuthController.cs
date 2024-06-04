@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NZWalksAPI.Models.DTO;
-using NZWalksAPI.Repositories;
+using NzWalksAPI.Domain.DTO;
+using NzWalksAPI.Data.Repositories;
 
-namespace NZWalksAPI.Controllers
+namespace NzWalksAPI.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]

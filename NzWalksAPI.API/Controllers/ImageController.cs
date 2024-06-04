@@ -1,12 +1,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NzWalksAPI.Models.DTO;
-using NzWalksAPI.Repositories;
-using NZWalksAPI.Models.Domain;
-using NZWalksAPI.Models.DTO;
+using NzWalksAPI.Domain.DTO;
+using NzWalksAPI.Data.Repositories;
+using NzWalksAPI.Domain.Domain;
+using NzWalksAPI.Domain.DTO;
 
-namespace NZWalksAPI.Controllers
+namespace NzWalksAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

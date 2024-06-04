@@ -11,12 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NzWalksAPI.Middlewares;
-using NzWalksAPI.Repositories;
-using NZWalksAPI.Data;
-using NZWalksAPI.Extensions;
-using NZWalksAPI.Mappings;
-using NZWalksAPI.Repositories;
+using NzWalksAPI.Core.Middlewares;
+using NzWalksAPI.Data;
+using NzWalksAPI.Data.Repositories;
+using NzWalksAPI.Utilities.Extensions;
+using NzWalksAPI.Mappings;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

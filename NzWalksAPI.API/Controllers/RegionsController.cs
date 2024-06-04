@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NzWalksAPI.Controllers.Base;
-using NZWalksAPI.CustomActionFilters;
-using NZWalksAPI.Data;
-using NZWalksAPI.Models.Domain;
-using NZWalksAPI.Models.DTO;
-using NZWalksAPI.Repositories;
+using NzWalksAPI.CustomActionFilters;
+using NzWalksAPI.Data;
+using NzWalksAPI.Domain.Domain;
+using NzWalksAPI.Domain.DTO;
+using NzWalksAPI.Data.Repositories;
 
-namespace NZWalksAPI.Controllers
+namespace NzWalksAPI.Controllers
 {
     [ApiVersion("1")]
     [ApiVersion("2")]
