@@ -1,6 +1,8 @@
 using System.Net;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
-namespace NzWalksAPI.Middlewares
+namespace NzWalksAPI.Core.Middlewares
 {
     public class ExceptionHandlerMiddleware
     (ILogger<ExceptionHandlerMiddleware> logger, RequestDelegate next)

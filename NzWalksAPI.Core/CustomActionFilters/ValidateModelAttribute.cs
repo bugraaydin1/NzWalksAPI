@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace NZWalksAPI.CustomActionFilters
+namespace NzWalksAPI.CustomActionFilters
 {
     // experimantal Attribute purposes only:
     // not actually needed for validation handling
