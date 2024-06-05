@@ -20,7 +20,7 @@ namespace NzWalksAPI.Controllers
         private readonly IMapper mapper = mapper;
 
         [HttpGet]
-        [Authorize(Roles = "Read")]
+        [Authorize(Roles = "Reader")]
         public async Task<ActionResult<string>> GetAll()
         {
             var imagesModel = await imageRepository.GetAllAsync();
@@ -28,7 +28,7 @@ namespace NzWalksAPI.Controllers
         }
 
         [HttpPost("upload")]
-        [Authorize(Roles = "Write")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> UploadImage([FromForm] ImageUploadRequstDto request)
         {
             ValidateFileUpload(request);
