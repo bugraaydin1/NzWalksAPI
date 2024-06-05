@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using NzWalksAPI.Domain.Domain;
 using NzWalksAPI.Data;
 
-namespace NzWalksAPI.Data.Repositories
+namespace NzWalksAPI.Repositories.Repositories
 {
     public class LocalImageRepository(IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor, NZWalksDbContext dbContext) : IImageRepository
     {

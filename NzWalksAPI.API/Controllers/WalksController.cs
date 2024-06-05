@@ -5,7 +5,7 @@ using NzWalksAPI.Controllers.Base;
 using NzWalksAPI.CustomActionFilters;
 using NzWalksAPI.Domain.Domain;
 using NzWalksAPI.Domain.DTO;
-using NzWalksAPI.Data.Repositories;
+using NzWalksAPI.Repositories.Repositories;
 
 namespace NzWalksAPI.Controllers
 {

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace NzWalksAPI.Data.Repositories
+namespace NzWalksAPI.Repositories.Repositories
 {
     public class TokenRepository(IConfiguration configuration) : ITokenRepository
     {

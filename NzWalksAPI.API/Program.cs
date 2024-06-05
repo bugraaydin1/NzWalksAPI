@@ -13,7 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NzWalksAPI.Core.Middlewares;
 using NzWalksAPI.Data;
-using NzWalksAPI.Data.Repositories;
+using NzWalksAPI.Repositories.Repositories;
 using NzWalksAPI.Utilities.Extensions;
 using NzWalksAPI.Mappings;
 using Serilog;

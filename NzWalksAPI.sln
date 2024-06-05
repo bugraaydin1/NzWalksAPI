@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NzWalksAPI.Mapping", "NzWal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NzWalksAPI.Core", "NzWalksAPI.Core\NzWalksAPI.Core.csproj", "{7F5DB9D7-DD20-4995-A856-96502496263A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NzWalksAPI.Repositories", "NzWalksAPI.Repositories\NzWalksAPI.Repositories.csproj", "{CEA35D22-0A37-46C3-BE3C-5346EB3AABC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{7F5DB9D7-DD20-4995-A856-96502496263A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F5DB9D7-DD20-4995-A856-96502496263A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F5DB9D7-DD20-4995-A856-96502496263A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEA35D22-0A37-46C3-BE3C-5346EB3AABC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEA35D22-0A37-46C3-BE3C-5346EB3AABC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEA35D22-0A37-46C3-BE3C-5346EB3AABC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEA35D22-0A37-46C3-BE3C-5346EB3AABC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

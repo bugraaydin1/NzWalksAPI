@@ -1,6 +1,6 @@
 using NzWalksAPI.Domain.Domain;
 
-namespace NzWalksAPI.Data.Repositories
+namespace NzWalksAPI.Repositories.Repositories
 {
     public interface IImageRepository
     {

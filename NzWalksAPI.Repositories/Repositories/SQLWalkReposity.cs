@@ -2,9 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using NzWalksAPI.Data;
 using NzWalksAPI.Domain.Domain;
 // using NzWalksAPI.Domain.DTO;
-// using NzWalksAPI.Data.Repositories;
+// using NzWalksAPI.Repositories.Repositories;
 
-namespace NzWalksAPI.Data.Repositories
+namespace NzWalksAPI.Repositories.Repositories
 {
     public class SQLWalkRepository(NZWalksDbContext dbContext) : IWalkRepository
     {

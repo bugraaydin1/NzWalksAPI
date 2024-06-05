@@ -2,7 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NzWalksAPI.Domain.DTO;
-using NzWalksAPI.Data.Repositories;
+using NzWalksAPI.Repositories.Repositories;
 using NzWalksAPI.Domain.Domain;
 using NzWalksAPI.Domain.DTO;
 

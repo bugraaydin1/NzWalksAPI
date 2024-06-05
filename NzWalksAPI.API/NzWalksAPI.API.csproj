@@ -50,7 +50,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NzWalksAPI.Core\NzWalksAPI.Core.csproj" />
-    <ProjectReference Include="..\NzWalksAPI.Data\NzWalksAPI.Data.csproj" />
+    <!-- <ProjectReference Include="..\NzWalksAPI.Data\NzWalksAPI.Data.csproj" /> -->
+    <ProjectReference Include="..\NzWalksAPI.Repositories\NzWalksAPI.Repositories.csproj" />
     <ProjectReference Include="..\NzWalksAPI.Mapping\NzWalksAPI.Mapping.csproj" />
     <ProjectReference Include="..\NzWalksAPI.Utilities\NzWalksAPI.Utilities.csproj" />
   </ItemGroup>
