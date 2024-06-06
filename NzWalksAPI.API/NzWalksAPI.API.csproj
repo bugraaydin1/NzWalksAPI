@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dce58f8a-6683-4f62-b0cd-576e76c76828</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="4.0.0-dev-02184" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.2-dev-00338" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.1.0-dev-00943" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00972" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NzWalksAPI.Core\NzWalksAPI.Core.csproj" />
+    <ProjectReference Include="..\NzWalksAPI.Infrastructure\NzWalksAPI.Infrastructure.csproj" />
+    <ProjectReference Include="..\NzWalksAPI.Repositories\NzWalksAPI.Repositories.csproj" />
+    <ProjectReference Include="..\NzWalksAPI.Mapping\NzWalksAPI.Mapping.csproj" />
+    <ProjectReference Include="..\NzWalksAPI.Utilities\NzWalksAPI.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\*">
+      <CopyToPublishDirectory>always</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

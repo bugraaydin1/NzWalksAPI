@@ -1,0 +1,25 @@
+using AutoMapper;
+using NzWalksAPI.Domain.DTO;
+using NzWalksAPI.Domain.Domain;
+
+namespace NzWalksAPI.Mappings
+{
+    public class AutoMapperProfiles : Profile
+    {
+        public AutoMapperProfiles()
+        {
+            CreateMap<Region, RegionDto>().ReverseMap();
+            CreateMap<Region, RegionDtoV2>().ReverseMap();
+            CreateMap<Region, AddRegionRequestDto>().ReverseMap();
+
+            CreateMap<Walk, WalkDto>().ReverseMap();
+            CreateMap<Walk, WalkDtoV2>().ReverseMap();
+            CreateMap<Walk, AddWalkRequestDto>().ReverseMap();
+
+            CreateMap<Difficulty, DifficultyDto>().ReverseMap();
+
+            CreateMap<Image, ImageUploadRequstDto>().ReverseMap();
+            CreateMap<Image, ImageDto>().ReverseMap();
+        }
+    }
+}
